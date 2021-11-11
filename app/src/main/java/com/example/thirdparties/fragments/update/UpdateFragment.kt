@@ -10,8 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.thirdparties.R
-import com.example.thirdparties.model.SoilCondition
 import com.example.thirdparties.viewmodel.SoilConditionViewModel
+import domain.models.SoilConditionLocalModel
 import kotlinx.android.synthetic.main.fragment_update.*
 import kotlinx.android.synthetic.main.fragment_update.view.*
 
@@ -49,7 +49,12 @@ class UpdateFragment : Fragment() {
         val cropCapacity = Integer.parseInt(update_crope_capacity_field.text.toString())
 
         if(inputCheck(area.toString(), lastAgriculture.toString(), cropCapacity.toString())){
-            val updatedInfo = SoilCondition(args.currentSoilCondition.id, area, lastAgriculture.toString(), cropCapacity)
+            val updatedInfo = SoilConditionLocalModel(
+                args.currentSoilCondition.id,
+                area,
+                lastAgriculture.toString(),
+                cropCapacity
+            )
 
             soilConditionViewModel.updateInfo(updatedInfo)
 

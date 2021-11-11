@@ -9,3 +9,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Third parties"
 include ':app'
+include ':core'
+include ':data'
+include ':domain'

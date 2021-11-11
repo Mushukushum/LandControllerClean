@@ -7,12 +7,12 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.thirdparties.R
 
-import com.example.thirdparties.model.SoilCondition
+import domain.models.SoilConditionLocalModel
 import kotlinx.android.synthetic.main.recycler_view.view.*
 
 class ListAdapter:RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 
-    private var soilConditionList = emptyList<SoilCondition>()
+    private var soilConditionList = emptyList<SoilConditionLocalModel>()
 
     class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
 
@@ -27,7 +27,7 @@ class ListAdapter:RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = soilConditionList[position]
         holder.itemView.number.text = currentItem.id.toString()
-        holder.itemView.area_size.text = currentItem.area.toString()
+        holder.itemView.area_size.text = currentItem.areaSize.toString()
         holder.itemView.last_agriculture.text = currentItem.lastAgriculture
         holder.itemView.crope_capacity.text = currentItem.cropCapacity.toString()
 
@@ -37,7 +37,7 @@ class ListAdapter:RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
         }
     }
 
-    fun setData(soilCondition: List<SoilCondition>){
+    fun setData(soilCondition: List<SoilConditionLocalModel>){
         this.soilConditionList = soilCondition
         notifyDataSetChanged()
     }

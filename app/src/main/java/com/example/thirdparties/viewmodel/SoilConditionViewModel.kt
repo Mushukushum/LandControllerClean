@@ -2,46 +2,55 @@ package com.example.thirdparties.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.example.thirdparties.repository.SoilConditionRepository
-import com.example.thirdparties.database.SoilDatabase
-import com.example.thirdparties.model.SoilCondition
+import data.entity.SoilDatabase
+import data.SoilConditionRepositoryImpl
+import domain.models.SoilConditionLocalModel
+import domain.usecase.SoilConditionUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class SoilConditionViewModel(application: Application): AndroidViewModel(application) {
 
-    val readAllData: LiveData<List<SoilCondition>>
-    private val repository: SoilConditionRepository
+
+    //lateinit var readAllData: LiveData<List<SoilConditionLocalModel>>
+
+    private val repository: SoilConditionRepositoryImpl
+    private val useCase: SoilConditionUseCase
 
     init{
         val soilConditionDao = SoilDatabase.getInstance(application).soilDatabaseDao
-        repository = SoilConditionRepository(soilConditionDao)
-        readAllData = repository.readAllData
+        repository = SoilConditionRepositoryImpl(soilConditionDao)
+        useCase = SoilConditionUseCase(repository)
     }
 
-    fun addInfo(soilCondition: SoilCondition){
+    fun addInfo(soilCondition: SoilConditionLocalModel){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.addInfo(soilCondition)
+            useCase.addInfo(soilCondition)
         }
     }
 
-    fun updateInfo(soilCondition: SoilCondition){
+    fun updateInfo(soilCondition: SoilConditionLocalModel){
         viewModelScope.launch(Dispatchers.IO){
-            repository.updateInfo(soilCondition)
+            useCase.updateInfo(soilCondition)
         }
     }
 
-    fun removeInfo(soilCondition: SoilCondition){
+    fun removeInfo(soilCondition: SoilConditionLocalModel){
         viewModelScope.launch(Dispatchers.IO){
-            repository.deleteInfo(soilCondition)
+            useCase.deleteInfo(soilCondition)
         }
     }
 
     fun removeAll(){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteAll()
+            useCase.deleteAll()
         }
     }
+
+//    fun getAllInfo(){
+//        viewModelScope.launch(Dispatchers.IO) {
+//            readAllData = useCase.getInfo()
+//        }
+//    }
 }

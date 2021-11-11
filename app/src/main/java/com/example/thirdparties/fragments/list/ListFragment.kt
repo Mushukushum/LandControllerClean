@@ -27,10 +27,10 @@ class ListFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        soilConditionViewModel = ViewModelProvider(this).get(SoilConditionViewModel::class.java)
-        soilConditionViewModel.readAllData.observe(viewLifecycleOwner, {
-            soilCondition -> adapter.setData(soilCondition)
-        })
+//        soilConditionViewModel = ViewModelProvider(this).get(SoilConditionViewModel::class.java)
+//        soilConditionViewModel.readAllData.observe(viewLifecycleOwner, {
+//                soilCondition -> adapter.setData(soilCondition)
+//        })
 
         val action = ListFragmentDirections.actionListFragmentToSoilConditionFragment3()
         view.floatingActionButton.setOnClickListener{

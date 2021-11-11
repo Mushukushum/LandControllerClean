@@ -10,10 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.thirdparties.R
-import com.example.thirdparties.model.SoilCondition
 import com.example.thirdparties.viewmodel.SoilConditionViewModel
+import domain.models.SoilConditionLocalModel
 import kotlinx.android.synthetic.main.fragment_soil_condition.*
 import kotlinx.android.synthetic.main.fragment_soil_condition.view.*
+import kotlinx.android.synthetic.main.recycler_view.*
 
 class SoilConditionFragment: Fragment() {
 
@@ -35,12 +36,14 @@ class SoilConditionFragment: Fragment() {
     }
 
     private fun insertDataToDatabase() {
+        val id = number.text.toString()
         val area = area_size_field.text.toString()
         val lastAgriculture = last_agriculture_field.text.toString()
         val cropCapacity = crope_capacity_field.text.toString()
 
-        if(inputCheck(area, lastAgriculture, cropCapacity)){
-            val info = SoilCondition(0, area.toDouble(), lastAgriculture, cropCapacity.toInt())
+        if(inputCheck(id, area, lastAgriculture, cropCapacity)){
+            val info =
+                SoilConditionLocalModel(id.toLong(), area.toDouble(), lastAgriculture, cropCapacity.toInt())
             soilConditionViewModel.addInfo(info)
             Toast.makeText(requireContext(), "Successfully added to database", Toast.LENGTH_LONG).show()
             val action = SoilConditionFragmentDirections.actionSoilConditionFragment3ToListFragment()
@@ -51,7 +54,7 @@ class SoilConditionFragment: Fragment() {
         }
     }
 
-    private fun inputCheck(area: String, lastAgriculture:String, cropCapacity:String):Boolean{
-        return !(TextUtils.isEmpty(area)&&TextUtils.isEmpty(lastAgriculture)&&TextUtils.isEmpty(cropCapacity))
+    private fun inputCheck(id: String, area: String, lastAgriculture:String, cropCapacity:String):Boolean{
+        return !(TextUtils.isEmpty(id)&&TextUtils.isEmpty(area)&&TextUtils.isEmpty(lastAgriculture)&&TextUtils.isEmpty(cropCapacity))
     }
 }
