@@ -50,11 +50,4 @@ class SoilConditionViewModel(application: Application): AndroidViewModel(applica
             useCase.deleteAll()
         }
     }
-
-//    fun getAllInfo(){
-//        viewModelScope.launch(Dispatchers.IO) {
-//            useCase.getInfo()
-//            Log.d("All info", useCase.getInfo().toString())
-//        }
-//    }
 }
