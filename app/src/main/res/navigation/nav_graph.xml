@@ -35,6 +35,6 @@
             app:destination="@id/listFragment" />
         <argument
             android:name="currentSoilCondition"
-            app:argType="com.example.thirdparties.model.SoilCondition" />
+            app:argType="data.entity.SoilCondition" />
     </fragment>
 </navigation>

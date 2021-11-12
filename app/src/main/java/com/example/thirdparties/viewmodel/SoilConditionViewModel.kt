@@ -1,10 +1,13 @@
 package com.example.thirdparties.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import data.entity.SoilDatabase
 import data.SoilConditionRepositoryImpl
+import data.entity.SoilCondition
 import domain.models.SoilConditionLocalModel
 import domain.usecase.SoilConditionUseCase
 import kotlinx.coroutines.Dispatchers
@@ -12,8 +15,7 @@ import kotlinx.coroutines.launch
 
 class SoilConditionViewModel(application: Application): AndroidViewModel(application) {
 
-
-    //lateinit var readAllData: LiveData<List<SoilConditionLocalModel>>
+    val readAllData: LiveData<List<SoilCondition>>
 
     private val repository: SoilConditionRepositoryImpl
     private val useCase: SoilConditionUseCase
@@ -22,6 +24,7 @@ class SoilConditionViewModel(application: Application): AndroidViewModel(applica
         val soilConditionDao = SoilDatabase.getInstance(application).soilDatabaseDao
         repository = SoilConditionRepositoryImpl(soilConditionDao)
         useCase = SoilConditionUseCase(repository)
+        readAllData = repository.readAllData
     }
 
     fun addInfo(soilCondition: SoilConditionLocalModel){
@@ -50,7 +53,8 @@ class SoilConditionViewModel(application: Application): AndroidViewModel(applica
 
 //    fun getAllInfo(){
 //        viewModelScope.launch(Dispatchers.IO) {
-//            readAllData = useCase.getInfo()
+//            useCase.getInfo()
+//            Log.d("All info", useCase.getInfo().toString())
 //        }
 //    }
 }

@@ -36,14 +36,13 @@ class SoilConditionFragment: Fragment() {
     }
 
     private fun insertDataToDatabase() {
-        val id = number.text.toString()
         val area = area_size_field.text.toString()
         val lastAgriculture = last_agriculture_field.text.toString()
         val cropCapacity = crope_capacity_field.text.toString()
 
-        if(inputCheck(id, area, lastAgriculture, cropCapacity)){
+        if(inputCheck(area, lastAgriculture, cropCapacity)){
             val info =
-                SoilConditionLocalModel(id.toLong(), area.toDouble(), lastAgriculture, cropCapacity.toInt())
+                SoilConditionLocalModel(0, area.toDouble(), lastAgriculture, cropCapacity.toInt())
             soilConditionViewModel.addInfo(info)
             Toast.makeText(requireContext(), "Successfully added to database", Toast.LENGTH_LONG).show()
             val action = SoilConditionFragmentDirections.actionSoilConditionFragment3ToListFragment()
@@ -54,7 +53,7 @@ class SoilConditionFragment: Fragment() {
         }
     }
 
-    private fun inputCheck(id: String, area: String, lastAgriculture:String, cropCapacity:String):Boolean{
-        return !(TextUtils.isEmpty(id)&&TextUtils.isEmpty(area)&&TextUtils.isEmpty(lastAgriculture)&&TextUtils.isEmpty(cropCapacity))
+    private fun inputCheck(area: String, lastAgriculture:String, cropCapacity:String):Boolean{
+        return !(TextUtils.isEmpty(area)&&TextUtils.isEmpty(lastAgriculture)&&TextUtils.isEmpty(cropCapacity))
     }
 }

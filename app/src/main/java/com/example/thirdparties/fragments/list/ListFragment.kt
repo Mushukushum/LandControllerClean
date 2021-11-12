@@ -2,6 +2,7 @@ package com.example.thirdparties.fragments.list
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -27,10 +28,10 @@ class ListFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-//        soilConditionViewModel = ViewModelProvider(this).get(SoilConditionViewModel::class.java)
-//        soilConditionViewModel.readAllData.observe(viewLifecycleOwner, {
-//                soilCondition -> adapter.setData(soilCondition)
-//        })
+        soilConditionViewModel = ViewModelProvider(this).get(SoilConditionViewModel::class.java)
+        soilConditionViewModel.readAllData.observe(viewLifecycleOwner, {
+                soilCondition -> adapter.setData(soilCondition)
+        })
 
         val action = ListFragmentDirections.actionListFragmentToSoilConditionFragment3()
         view.floatingActionButton.setOnClickListener{

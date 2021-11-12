@@ -1,6 +1,5 @@
 package domain.usecase
 
-import androidx.lifecycle.LiveData
 import domain.models.SoilConditionLocalModel
 import domain.repository.SoilCoditionRepository
 
@@ -11,7 +10,7 @@ class SoilConditionUseCase(private val repository: SoilCoditionRepository) {
     }
 
     fun updateInfo(soilConditionLocalModel: SoilConditionLocalModel){
-        repository.addInfo(soilConditionLocalModel)
+        repository.updateInfo(soilConditionLocalModel)
     }
 
     fun deleteInfo(soilConditionLocalModel: SoilConditionLocalModel){
@@ -21,6 +20,4 @@ class SoilConditionUseCase(private val repository: SoilCoditionRepository) {
     fun deleteAll(){
         repository.deleteAll()
     }
-
-    //suspend fun getInfo():LiveData<List<SoilConditionLocalModel>> = repository.getAllInfo()
 }

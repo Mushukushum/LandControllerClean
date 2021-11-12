@@ -5,8 +5,4 @@ data class SoilConditionLocalModel(
     val areaSize:Double,
     val lastAgriculture: String,
     val cropCapacity:Int
-) {
-    fun getInfo(): SoilConditionLocalModel{
-        return SoilConditionLocalModel(id, areaSize, lastAgriculture, cropCapacity)
-    }
-}
+)

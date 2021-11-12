@@ -87,7 +87,7 @@ class UpdateFragment : Fragment() {
     private fun deleteInfo() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setPositiveButton("Yes"){_,_ ->
-            soilConditionViewModel.removeInfo(args.currentSoilCondition)
+            soilConditionViewModel.removeInfo(SoilConditionLocalModel(args.currentSoilCondition.id, args.currentSoilCondition.area, args.currentSoilCondition.lastAgriculture, args.currentSoilCondition.cropCapacity))
             Toast.makeText(requireContext(), "Successfully removed: ${args.currentSoilCondition.lastAgriculture}", Toast.LENGTH_LONG).show()
             val action = UpdateFragmentDirections.actionUpdateFragmentToListFragment()
             findNavController().navigate(action)

@@ -1,5 +1,6 @@
 package data
 
+import androidx.lifecycle.LiveData
 import data.dao.DatabaseDao
 
 import data.entity.SoilCondition
@@ -8,12 +9,12 @@ import domain.repository.SoilCoditionRepository
 
 class SoilConditionRepositoryImpl(private val databaseDao: DatabaseDao):SoilCoditionRepository {
 
-    val readAllData: List<SoilCondition> = databaseDao.getAllInfo()
+    val readAllData: LiveData<List<SoilCondition>> = databaseDao.getAllInfo()
 
 
     override fun addInfo(soil: SoilConditionLocalModel) {
         databaseDao.insert(SoilCondition(
-                id = soil.id,
+                0,
                 area = soil.areaSize,
                 lastAgriculture = soil.lastAgriculture,
                 cropCapacity = soil.cropCapacity
@@ -44,9 +45,5 @@ class SoilConditionRepositoryImpl(private val databaseDao: DatabaseDao):SoilCodi
 
     override fun deleteAll() {
         databaseDao.deleteAll()
-    }
-
-    override suspend fun getAllInfo():List<SoilConditionLocalModel>{
-        return databaseDao.getAllInfo().map { it.convertToLocal() }
     }
 }

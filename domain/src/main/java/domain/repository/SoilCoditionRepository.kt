@@ -7,5 +7,4 @@ interface SoilCoditionRepository {
     fun updateInfo(soil: SoilConditionLocalModel)
     fun deleteInfo(soil: SoilConditionLocalModel)
     fun deleteAll()
-    suspend fun getAllInfo(): List<SoilConditionLocalModel>
 }
